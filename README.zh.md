@@ -69,3 +69,7 @@ MIT License
 ## 🌟 给星
 
 如果这个仓库对你有帮助，欢迎Star ⭐ 你的支持是持续更新的动力。
+
+## 📬 联系方式
+
+- **Email**: donglinfei@gmail.com（商务/招聘联系）

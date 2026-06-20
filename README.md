@@ -69,3 +69,7 @@ MIT
 ## 🌟 Star
 
 If you find this useful, please consider starring ⭐ the repository — it motivates continued updates.
+
+## 📬 Contact
+
+- **Email**: donglinfei@gmail.com (business / recruiting inquiries)
