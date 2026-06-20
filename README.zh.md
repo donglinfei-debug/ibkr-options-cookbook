@@ -72,4 +72,5 @@ MIT License
 
 ## 📬 联系方式
 
+- **作者**: Ryan Dong
 - **Email**: donglinfei@gmail.com（商务/招聘联系）

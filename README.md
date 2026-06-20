@@ -72,4 +72,5 @@ If you find this useful, please consider starring ⭐ the repository — it moti
 
 ## 📬 Contact
 
+- **Author**: Ryan Dong
 - **Email**: donglinfei@gmail.com (business / recruiting inquiries)
