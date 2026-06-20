@@ -1,0 +1,60 @@
+# ===== Environment variables (NEVER commit) =====
+.env
+.env.*
+.env.local
+.env.production
+.env.development
+
+# ===== Secrets and certificates =====
+*.pem
+*.key
+*.p12
+*.jks
+*.cer
+credentials.json
+client_secret*.json
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+env/
+.python-version
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# ===== IDE config =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ===== Logs =====
+*.log
+debug.log
+
+# ===== Internal working files (not for public) =====
+WORK_CHECKLIST.md
+OUTLINE.md
+CODE_AUDIT.md
+
+# ===== Large / binary =====
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.exe
+*.dmg
+*.iso
