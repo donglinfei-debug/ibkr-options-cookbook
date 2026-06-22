@@ -1,38 +1,119 @@
-# ibkr-options-cookbook 🥘
+<div align="center">
 
-> IBKR Python Options Automation: Architecture Patterns & Practical Guide
+# 🥘 IBKR Options Cookbook
 
-An open-source knowledge base for **Interactive Brokers (IBKR) API** options traders. This is not a "copy-paste trading bot" — it's a **cookbook of architecture patterns**, with code as the medium.
+**IBKR Python 期权自动化交易：架构设计模式与实战指南**
+
+[![GitHub Stars](https://img.shields.io/github/stars/donglinfei-debug/ibkr-options-cookbook?style=flat-square&logo=github)](https://github.com/donglinfei-debug/ibkr-options-cookbook/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/donglinfei-debug/ibkr-options-cookbook?style=flat-square&logo=github)](https://github.com/donglinfei-debug/ibkr-options-cookbook/issues)
+[![GitHub Forks](https://img.shields.io/github/forks/donglinfei-debug/ibkr-options-cookbook?style=flat-square&logo=github)](https://github.com/donglinfei-debug/ibkr-options-cookbook/forks)
+[![License](https://img.shields.io/github/license/donglinfei-debug/ibkr-options-cookbook?style=flat-square)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg?style=flat-square&logo=python)](https://www.python.org/)
+[![IB API](https://img.shields.io/badge/IB_API-Compatible-orange.svg?style=flat-square)](https://www.interactivebrokers.com/)
+
+🌏 **Language / 语言**：[🇨🇳 中文](README.zh.md) | [🇬🇧 English](README.md)
+
+</div>
+
+---
+
+An open-source knowledge base for **Interactive Brokers (IBKR) API** options traders. This is **not** a "copy-paste trading bot" — it's a **cookbook of architecture patterns**, with clean, modular code as the medium.
+
+## 🏗️ Architecture Overview
+
+```mermaid
+flowchart TB
+    subgraph Demo["🧪 Strategy Demo"]
+        ICD[iron_condor_demo.py]
+    end
+
+    subgraph Core["🧱 Core Modules (src/)"]
+        CM[connection_manager.py<br/>Singleton · Thread-safe ·<br/>ClientID Allocation · Auto-Retry]
+        MD[market_data.py<br/>SPX Snapshot & Streaming<br/>Trading Hours · Strike Generator]
+        OC[option_chain.py<br/>Contract Builder · Chain Fetch<br/>Batch Resolver · Delta Filter]
+        OL[order_lifecycle.py<br/>OrderTracker · Modification Guard<br/>Legacy Order Cleaner]
+        RC[risk_controls.py<br/>Debounce · Rate Limiter<br/>Timeout Guard]
+        NF[notifier.py<br/>Webhook · HMAC-SHA256<br/>DingTalk / Custom Endpoint]
+        TR[trade_recorder.py<br/>Excel Journal · Auto-create<br/>Append Rows · Header Mgmt]
+    end
+
+    subgraph External["🌐 External Systems"]
+        TWS[TWS / IB Gateway]
+        WEB[Webhook Endpoint]
+        XLS[Excel File]
+    end
+
+    ICD --> CM
+    ICD --> MD
+    ICD --> OC
+    ICD --> OL
+    ICD --> RC
+    ICD --> NF
+    ICD --> TR
+
+    CM <--> TWS
+    MD <--> TWS
+    OC <--> TWS
+    OL <--> TWS
+
+    NF --> WEB
+    TR --> XLS
+
+    style ICD fill:#6366f1,color:#fff,stroke:none
+    style CM fill:#0ea5e9,color:#fff,stroke:none
+    style MD fill:#0ea5e9,color:#fff,stroke:none
+    style OC fill:#0ea5e9,color:#fff,stroke:none
+    style OL fill:#0ea5e9,color:#fff,stroke:none
+    style RC fill:#0ea5e9,color:#fff,stroke:none
+    style NF fill:#0ea5e9,color:#fff,stroke:none
+    style TR fill:#0ea5e9,color:#fff,stroke:none
+    style TWS fill:#f59e0b,color:#fff,stroke:none
+    style WEB fill:#10b981,color:#fff,stroke:none
+    style XLS fill:#10b981,color:#fff,stroke:none
+```
 
 ## 📖 What Is This?
 
 If you're building automated options trading systems on the IB API, you've faced these questions:
 
-- How to manage multiple modules sharing a single TWS connection without ClientID conflicts?
-- How to batch-fetch option chain data efficiently?
-- How to automatically adjust limit order prices to improve fill rates?
-- How to prevent risk controls from being overwhelmed by market noise in volatile conditions?
+- How to manage multiple modules sharing a single TWS connection **without ClientID conflicts**?
+- How to **batch-fetch option chain data** efficiently?
+- How to **automatically adjust limit order prices** to improve fill rates?
+- How to **prevent risk controls from being overwhelmed** by market noise in volatile conditions?
 
-**ibkr-options-cookbook** answers these questions using the **SPX Iron Condor** strategy as a running case study. Each chapter covers one design topic, accompanied by clean, modular reference code.
+**ibkr-options-cookbook** answers these questions using the **SPX Iron Condor** strategy as a running case study. Each chapter covers one design topic, accompanied by clean, independently usable reference code.
+
+## 📦 System Requirements
+
+| Requirement | Minimum | Recommended |
+|:------------|:--------|:------------|
+| **Python** | 3.8 | 3.11+ |
+| **TWS / IB Gateway** | Build 978+ | Latest stable |
+| **RAM** | 256 MB | 512 MB+ |
+| **Market Data Subscription** | Snapshot only | Live streaming |
+| **OS** | Windows / macOS / Linux | — |
 
 ## 📂 Structure
 
 ```
-docs/
-├── zh/      ← Chinese documentation (9 chapters)
-└── en/      ← English documentation (9 chapters)
-
-src/         ← Reference code modules (English comments, independently usable)
-├── connection_manager.py    ← Singleton connection management
-├── market_data.py           ← Market data fetching
-├── option_chain.py          ← Option chain utilities
-├── order_lifecycle.py       ← Order lifecycle management
-├── risk_controls.py         ← Risk control components (Debounce/RateLimiter)
-├── notifier.py              ← Webhook notifications
-└── trade_recorder.py        ← Excel trade journal
-
-examples/
-└── iron_condor_demo.py      ← Iron Condor demo script
+ibkr-options-cookbook/
+├── docs/
+│   ├── zh/          ← Chinese docs (9 chapters)
+│   └── en/          ← English docs (9 chapters)
+├── src/
+│   ├── connection_manager.py   ← Connection: Singleton, ClientID, auto-retry
+│   ├── market_data.py          ← Data: SPX snapshot/streaming, strike gen
+│   ├── option_chain.py         ← Chain: contract builder, batch fetch, delta filter
+│   ├── order_lifecycle.py      ← Orders: tracker, modification guard, cleanup
+│   ├── risk_controls.py        ← Risk: Debounce, RateLimiter, TimeoutGuard
+│   ├── notifier.py             ← Alerts: DingTalk webhook, HMAC-SHA256
+│   └── trade_recorder.py       ← Journal: Excel trade recording
+├── examples/
+│   └── iron_condor_demo.py     ← Demo: Iron Condor walkthrough
+├── README.md
+├── README.zh.md
+├── LICENSE                     ← MIT
+└── .env.example                ← Template for config
 ```
 
 ## 📚 Chapters
@@ -49,12 +130,35 @@ examples/
 | 8 | [Notification & Recording](docs/en/08-notification-and-recording.md) | [交易通知与记录](docs/zh/08-notification-and-recording.md) |
 | 9 | [Case Study: Iron Condor](docs/en/09-iron-condor-case-study.md) | [铁鹰策略案例全流程](docs/zh/09-iron-condor-case-study.md) |
 
+## 🚀 Quick Start
+
+```bash
+# 1. Clone
+git clone https://github.com/donglinfei-debug/ibkr-options-cookbook.git
+cd ibkr-options-cookbook
+
+# 2. (Recommended) Create virtual environment
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# 3. Install dependencies
+pip install ibapi pytz pandas openpyxl requests
+
+# 4. Start reading
+# Start with docs/en/01-architecture.md or docs/zh/01-architecture.md
+```
+
+> **Note**: `ibapi` is Interactive Brokers' official Python API. It is **not** available on PyPI — download it from your TWS/IB Gateway installation directory or the [IB GitHub](https://github.com/InteractiveBrokers/tws-api).
+
 ## 💻 Tech Stack
 
-- **Platform**: Interactive Brokers (TWS / IB Gateway)
-- **API**: `ibapi` (official IB Python API)
-- **Python**: 3.8+
-- **Dependencies**: `ibapi`, `pytz`, `pandas`, `openpyxl`, `requests`
+| Component | Technology |
+|:----------|:-----------|
+| **Broker API** | Interactive Brokers (`ibapi`) |
+| **Data** | `pandas`, `pytz` |
+| **Notifications** | `requests` (DingTalk webhook, HMAC-SHA256) |
+| **Journaling** | `openpyxl` (Excel) |
+| **Python** | 3.8+ |
 
 ## ⚠️ Important Notes
 
@@ -64,9 +168,11 @@ examples/
 
 ## 📄 License
 
-MIT
+[MIT](LICENSE)
 
-## 🌟 Star
+## 🌟 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=donglinfei-debug/ibkr-options-cookbook&type=Date)](https://star-history.com/#donglinfei-debug/ibkr-options-cookbook&Date)
 
 If you find this useful, please consider starring ⭐ the repository — it motivates continued updates.
 
