@@ -19,6 +19,18 @@
 
 An open-source knowledge base for **Interactive Brokers (IBKR) API** options traders. This is **not** a "copy-paste trading bot" — it's a **cookbook of architecture patterns**, with clean, modular code as the medium.
 
+
+## 📌 Why This?
+
+If you're building automated options trading systems on the IB API, you've faced these questions:
+
+- **How to manage multiple modules sharing a single TWS connection** without ClientID conflicts?
+- **How to batch-fetch option chain data** efficiently without hitting API rate limits?
+- **How to automatically adjust limit order prices** to improve fill rates in fast-moving markets?
+- **How to prevent risk controls from being overwhelmed** by false signals in volatile conditions?
+
+**ibkr-options-cookbook** answers these questions with clean, modular reference code — using the SPX Iron Condor strategy as a running case study. It's not a ready-to-run bot; it's a collection of battle-tested architecture patterns.
+
 ## 🏗️ Architecture Overview
 
 ```mermaid
@@ -166,6 +178,13 @@ pip install ibapi pytz pandas openpyxl requests
 2. **Trading involves risk.** All code is for educational reference only. Test thoroughly before live use. Trade at your own risk.
 3. **Core strategy parameters are not published here.** The Iron Condor's specific parameters (Delta thresholds, credit ranges, special adjustment prices, etc.) are the author's proprietary trading experience and are outside the scope of this repository.
 
+
+
+---
+
+## 🔍 Keywords & Search Terms
+
+**IBKR options trading automation**, **Interactive Brokers Python API**, **options trading bot architecture**, **Iron Condor strategy automation**, **SPX options trading**, **IBKR API connection management**, **automated options trading system**, **TWS API Python**, **IB Gateway integration**, **options chain data fetching**, **limit order price adjustment**, **trading risk control debounce**, **Feishu bot notification**, **DingTalk webhook integration**, **Gmail AI summary notification**, **Google Apps Script Gmail monitoring**, **AI subtitle proofreading**, **ASR speech recognition**, **DeepSeek API integration**, **Alibaba Cloud fun-asr**, **subtitle generation automation**, **Claude Code planning skill**, **AI structured planning framework**, **GitHub public-prep security scan**, **open source project sanitization**, **secret detection automation**, **public repository checklist**
 ## 📄 License
 
 [MIT](LICENSE)
