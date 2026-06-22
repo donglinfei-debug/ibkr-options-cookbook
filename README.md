@@ -180,11 +180,20 @@ pip install ibapi pytz pandas openpyxl requests
 
 
 
----
+## ❓ FAQ
 
-## 🔍 Keywords & Search Terms
+**Is this a ready-to-run trading bot?**
+No. This is a knowledge base of architecture patterns and reference code, not a complete trading strategy. You need to supply your own strategy logic and risk parameters.
 
-**IBKR options trading automation**, **Interactive Brokers Python API**, **options trading bot architecture**, **Iron Condor strategy automation**, **SPX options trading**, **IBKR API connection management**, **automated options trading system**, **TWS API Python**, **IB Gateway integration**, **options chain data fetching**, **limit order price adjustment**, **trading risk control debounce**, **Feishu bot notification**, **DingTalk webhook integration**, **Gmail AI summary notification**, **Google Apps Script Gmail monitoring**, **AI subtitle proofreading**, **ASR speech recognition**, **DeepSeek API integration**, **Alibaba Cloud fun-asr**, **subtitle generation automation**, **Claude Code planning skill**, **AI structured planning framework**, **GitHub public-prep security scan**, **open source project sanitization**, **secret detection automation**, **public repository checklist**
+**Do I need a live TWS connection to use this?**
+Yes. The code modules connect to TWS or IB Gateway. A paper trading account with market data subscriptions is sufficient for development and testing.
+
+**What is the Iron Condor strategy used in the examples?**
+The Iron Condor is a non-directional options strategy that sells an out-of-the-money put spread and call spread simultaneously. It profits when the underlying stays within a defined range.
+
+**Can I use these modules for other strategies besides Iron Condor?**
+Absolutely. The modules are strategy-agnostic — connection management, data fetching, order lifecycle, and risk controls work with any options or equities strategy.
+
 ## 📄 License
 
 [MIT](LICENSE)
@@ -194,6 +203,23 @@ pip install ibapi pytz pandas openpyxl requests
 [![Star History Chart](https://api.star-history.com/svg?repos=donglinfei-debug/ibkr-options-cookbook&type=Date)](https://star-history.com/#donglinfei-debug/ibkr-options-cookbook&Date)
 
 If you find this useful, please consider starring ⭐ the repository — it motivates continued updates.
+
+
+
+## 👤 About the Author
+
+**Ryan Dong** — AI Product Manager & Full-Stack Developer
+
+I bridge the gap between AI capabilities and production-ready software. My work spans the full stack: from designing AI-powered product features and integrating LLM APIs, to building modular backend services and shipping clean, documented code.
+
+| Role | Focus |
+|:-----|:------|
+| 🧠 **AI Product Manager** | Product strategy, AI feature design, prompt engineering, model selection |
+| 💻 **Full-Stack Developer** | Python, FastAPI, Google Apps Script, automation pipelines, API integration |
+
+This repository is part of a personal toolbox — a growing collection of practical, reusable modules that solve real automation problems. Each project is designed to be independently useful and easily integrated into larger systems.
+
+📬 **donglinfei@gmail.com** — open to business discussions, collaborations, and recruiting inquiries.
 
 ## 📬 Contact
 
